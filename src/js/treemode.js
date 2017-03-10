@@ -795,6 +795,12 @@ treemode._onEvent = function (event) {
 
   var node = Node.getNodeFromTarget(event.target);
 
+  if(event.type === 'click'){
+    if( this.options.onNodeClick ){
+      return this.options.onNodeClick(node, event);
+    }
+  }
+
   if (node && node.selected) {
     if (event.type == 'click') {
       if (event.target == node.dom.menu) {
@@ -803,6 +809,8 @@ treemode._onEvent = function (event) {
         // stop propagation (else we will open the context menu of a single node)
         return;
       }
+
+
 
       // deselect a multi selection
       if (!event.hasMoved) {

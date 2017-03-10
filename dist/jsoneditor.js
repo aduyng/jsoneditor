@@ -25,7 +25,7 @@
  *
  * @author  Jos de Jong, <wjosdejong@gmail.com>
  * @version 5.5.11
- * @date    2017-01-06
+ * @date    2017-03-10
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -166,7 +166,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var VALID_OPTIONS = [
 	        'ace', 'theme',
 	        'ajv', 'schema',
-	        'onChange', 'onEditable', 'onError', 'onModeChange',
+	        'onChange', 'onEditable', 'onError', 'onModeChange', 'onNodeClick',
 	        'escapeUnicode', 'history', 'search', 'mode', 'modes', 'name', 'indentation', 'sortObjectKeys'
 	      ];
 
@@ -9170,6 +9170,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  var node = Node.getNodeFromTarget(event.target);
 
+	  if(event.type === 'click'){
+	    if( this.options.onNodeClick ){
+	      return this.options.onNodeClick(node, event);
+	    }
+	  }
+
 	  if (node && node.selected) {
 	    if (event.type == 'click') {
 	      if (event.target == node.dom.menu) {
@@ -9178,6 +9184,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // stop propagation (else we will open the context menu of a single node)
 	        return;
 	      }
+
+
 
 	      // deselect a multi selection
 	      if (!event.hasMoved) {
