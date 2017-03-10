@@ -9172,7 +9172,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  if(event.type === 'click'){
 	    if( this.options.onNodeClick ){
-	      return this.options.onNodeClick(node, event);
+	      this.options.onNodeClick(node, event);
 	    }
 	  }
 
